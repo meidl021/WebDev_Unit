@@ -14,6 +14,11 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"
   integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
   crossorigin=""/>
+<!--Add stylesheet for CSV-->
+<!--remove csv attempt <script src='https://api.mapbox.com/mapbox.js/v3.2.1/mapbox.js'></script>-->
+<!--remove csv attempt <link href='https://api.mapbox.com/mapbox.js/v3.2.1/mapbox.css' rel='stylesheet' />-->
+<script src='https://github.com/gis4533-fall2019/webdev-unit/blob/master/airports.csv'></script>
+<!--remove 2nd attempt <script src='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-omnivore/v0.3.1/leaflet-omnivore.min.js'></script>-->
 <!--Updated map sizing style here. Additional code commands noted below-->
     <style>
         body {
@@ -27,10 +32,11 @@
     </style>
        </head>
 <body>
-    
+
     <!-- Our web map and content will go here -->
        <!-- Add the Leaflet JavaScript library -->
     <a href="https://leafletjs.com">I built this with Leaflet</a>
+    
 <!--    Updated/removed pixel specs for the map so it will show full screen dynamically-->
     <div id="map"></div>
 <!--    Updated 2nd place of code for Leaflet version-->
@@ -42,6 +48,29 @@
     var map = L.map('map',{ center: [42.362432, -71.086086], zoom: 14});
       // Add OpenStreetMap tile layer to map element
       L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', { attribution: '© OpenStreetMap' }).addTo(map);
+    // Create point feature for Kendall Square T Station
+        var myDataPoint = L.marker([42.362432, -71.086086]).addTo(map);
+        
+    // Create line feature for Mass Ave Bridge, style and add to map
+        var myDataLine = L.polyline([[42.357227, -71.092631], [42.351411, -71.089723]],
+    {color: 'red', weight: 10}).addTo(map);
+    // Create area feature for MIT, style and add to map
+        var myArea = L.polygon([[42.353770, -71.103606], [42.355447, -71.104475],
+    [42.362681, -71.089830], [42.361829, -71.079230]],
+    {color: 'blue', weight: 4}).addTo(map);
+    
+    // Add csv code for leaflet omnivore
+        var map = L.mapbox.map('map', 'mapbox.streets')
+        .setView([38, -102.0], 5);
+    omnivore.csv('airport.csv').addTo(map);
+     // Add icon   
+    var airportIcon = L.icon({
+	iconUrl: 'airport.png',
+        iconSize:     [38, 95], // size of the icon
+        iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
+        popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+    });
+    L.marker([51.5, -0.09], {icon: airportIcon}).addTo(map);    
     </script>
 </body>
 </html>
