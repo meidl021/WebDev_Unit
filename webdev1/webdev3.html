@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+<!--    Update Map Title-->
+	<title>Leaflet Web Dev 1 Map</title>
+<!--   Add course name, your name, etc -->
+    <h1>GIS 4533, WebDev Map 1
+    <br>Brandy Meidl</br>
+    <br>Due 10/21/19</br>
+    </h1>
+    <!-- External Stylesheets -->
+<!--Updated Leaflet version here-->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"
+  integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+  crossorigin=""/>
+<!--Updated map sizing style here. Additional code commands noted below-->
+    <style>
+        body {
+            padding: 0;
+            margin: 0;
+        }
+        html, body, #map {
+            height: 100%;
+            width: 100%;
+                }
+    </style>
+       </head>
+<body>
+    
+    <!-- Our web map and content will go here -->
+       <!-- Add the Leaflet JavaScript library -->
+    <a href="https://leafletjs.com">I built this with Leaflet</a>
+<!--    Updated/removed pixel specs for the map so it will show full screen dynamically-->
+    <div id="map"></div>
+<!--    Updated 2nd place of code for Leaflet version-->
+   <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"
+  integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og=="
+  crossorigin=""></script>
+    <script>
+    // Create variable to hold map element, give initial settings to map
+    var map = L.map('map',{ center: [42.362432, -71.086086], zoom: 14});
+
+      // Add OpenStreetMap tile layer to map element
+      L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', { attribution: '© OpenStreetMap' }).addTo(map);
+    </script>
+</body>
+</html>
