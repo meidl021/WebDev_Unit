@@ -74,7 +74,13 @@
 	iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
     });
      L.marker([51.5, -0.09], {icon: airportIcon}).addTo(map);   
->>>>>>> Stashed changes
+    iconSize:     [40, 40], // size of the icon
+         });
+    
+    // Create airports feature from airport csv
+    var myAirportCsv = omnivore.csv('https://github.com/gis4533-fall2019/webdev-unit/blob/master/airport.csv', null, customLayer).addTo(map);
+    // Create custom layer
+    var customLayer = L.geoJson(null, {pointToLayer: function (feature, latlong){return L.marker (latlong, {icon: airportIcon})}})
     </script>
 </body>
 </html>
