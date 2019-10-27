@@ -43,17 +43,11 @@
     // Create variable to hold map element, give initial settings to map
     var map = L.map('map',{ center: [46.786380, -92.094997], zoom: 14});
       // Add OpenStreetMap tile layer to map element
+        // Also change the basemap
         L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Physical_Map/MapServer/tile/{z}/{y}/{x}', {
 	attribution: 'Tiles &copy; Esri &mdash; Source: US National Park Service',
 	maxZoom: 8 }).addTo(map);
-        
-      //  http://{s}.tile.osm.org/{z}/{x}/{y}.png', { attribution: '© OpenStreetMap
-        
-      //var Esri_WorldPhysical = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Physical_Map/MapServer/tile/{z}/{y}/{x}', {
-	// attribution: 'Tiles &copy; Esri &mdash; Source: US National Park Service',
-	//maxZoom: 8
-//});  
-        
+         
 
     </script>
 </body>
