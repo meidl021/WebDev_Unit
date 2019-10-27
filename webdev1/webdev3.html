@@ -3,18 +3,20 @@
 <head>
 	<meta charset="utf-8">
 <!--    Update Map Title-->
-	<title>Leaflet Web Dev 1 Map</title>
+	<title>Leaflet Web Dev Maps</title>
+    
 <!--   Add course name, your name, etc -->
-    <h1>GIS 4533, WebDev Map 1
+    <h1>GIS 4533, WebDev Maps
     <br>Brandy Meidl</br>
-    <br>Due 10/21/19</br>
+    <br>Due 10/30/19</br>
     </h1>
     <!-- External Stylesheets -->
-<!--Updated Leaflet version here-->
+    <!--Updated Leaflet version here-->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"
   integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
   crossorigin=""/>
-<!--Updated map sizing style here. Additional code commands noted below-->
+    
+    <!--Updated map sizing style here. Additional code commands noted below-->
     <style>
         body {
             padding: 0;
@@ -25,56 +27,76 @@
             width: 100%;
         }
     </style>
-       </head>
+    </head>
 <body>
     
     <!-- Our web map and content will go here -->
-       <!-- Add the Leaflet JavaScript library -->
+    <!-- Add the Leaflet JavaScript library -->
     <a href="https://leafletjs.com">I built this with Leaflet</a>
-<!--    Updated/removed pixel specs for the map so it will show full screen dynamically-->
+    <!--    Updated/removed pixel specs for the map so it will show full screen dynamically-->
     <div id="map"></div>
-<!--    Updated 2nd place of code for Leaflet version-->
-   <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"
+    
+    <!--    Updated 2nd place of code for Leaflet version-->
+    <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"
   integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og=="
   crossorigin=""></script>
+    
     <script>
+        
     // Create variable to hold map element, give initial settings to map
-    var map = L.map('map',{ center: [42.362432, -71.086086], zoom: 14});
-      // Add OpenStreetMap tile layer to map element
-      L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', { attribution: '© OpenStreetMap' }).addTo(map);
+    // Update map to Duluth coordinates
+    var map = L.map('map').setView([46.786, -92.09], 11);
+    // back up in case oops [42.3624, -71.0860], zoom: 14});
+    
+    // Add OpenStreetMap tile layer to map element
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org">OpenStreetMap</a> contributors'
+}).addTo(map);
+        
+//    back up in case oops '© OpenStreetMap' }).addTo(map);
+        
     // Create point feature for Kendall Square T Station
-var myDataPoint = L.marker([42.362432, -71.086086]).addTo(map);
+    // var myDataPoint = L.marker([42.362432, -71.086086]).addTo(map);
         
-        // Create line feature for Mass Ave Bridge, style and add to map
-var myDataLine = L.polyline([[42.357227, -71.092631], [42.351411, -71.089723]],
-    {color: 'red', weight: 10}).addTo(map);
+    // Create line feature for Mass Ave Bridge, style and add to map
+    // var myDataLine = L.polyline([[42.357227, -71.092631], [42.351411, -71.089723]],
+    // {color: 'red', weight: 10}).addTo(map);
         
-        // Create area feature for MIT, style and add to map
-var myArea = L.polygon([[42.353770, -71.103606], [42.355447, -71.104475],
+    // Create area feature for MIT, style and add to map
+    // var myArea = L.polygon([[42.353770, -71.103606], [42.355447, -71.104475],
     [42.362681, -71.089830], [42.361829, -71.079230]],
-    {color: 'blue', weight: 4}).addTo(map);
+    // {color: 'blue', weight: 4}).addTo(map);
         
-        // Bind popup to data point object
-myDataPoint.bindPopup("<h3>Kendall Square</h3><p>Cambridge, MA<br>Information about Kendall Square.</p>");
+    // Bind popup to data point object
+    // myDataPoint.bindPopup("<h3>Kendall Square</h3><p>Cambridge, MA<br>Information about Kendall Square.</p>");
         
-        // Bind popup to line object
-myDataLine.bindPopup("Mass Ave Bridge");
-// Bind popup to area object
-myArea.bindPopup("MIT Campus");
-        
-        // Create an Empty Popup
-        var popup = L.popup();
+    // Bind popup to line object
+    myDataLine.bindPopup("Mass Ave Bridge");
 
-        // Write function to set Properties of the Popup
-        function onMapClick(e) {
+    // Bind popup to area object
+    myArea.bindPopup("MIT Campus");
+        
+    // Create an Empty Popup
+    var popup = L.popup();
+
+    // Write function to set Properties of the Popup
+    function onMapClick(e) {
     popup
         .setLatLng(e.latlng)
         .setContent("You clicked the map at " + e.latlng.toString())
         .openOn(map);
-}
+    }
 
-        // Listen for a click event on the Map element
-        map.on('click', onMapClick);
+    // Listen for a click event on the Map element
+    map.on('click', onMapClick);
+    
+    
+        
     </script>
+    
+    <!-- HTML Page Elements are here -->
+<!--    Step 5: (undelete for WebDev4) <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>-->
+        <!-- Web Map Scripts are here -->
+    
 </body>
 </html>
