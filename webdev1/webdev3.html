@@ -3,9 +3,9 @@
 <head>
 	<meta charset="utf-8">
 <!--    Update Map Title-->
-	<title>Leaflet Web Dev 1 Map</title>
+	<title>Leaflet Web Dev Maps</title>
 <!--   Add course name, your name, etc -->
-    <h1>GIS 4533, WebDev Map 1
+    <h1>GIS 4533, WebDev Maps
     <br>Brandy Meidl</br>Due 10/30/19</br>
     </h1>
     <!-- External Stylesheets -->
@@ -39,21 +39,27 @@
   integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og=="
   crossorigin=""></script>
     
+    // Task 5: Container for displaying map coordinates
+    <pre id='containerForDisplayingMapCoord'></pre>
+    
     <script>
     // Create variable to hold map element, give initial settings to map
+    // Task 2: Change the X,Y coordinates to Duluth, MN
     var map = L.map('map',{ center: [46.786380, -92.094997], zoom: 14});
-      // Add OpenStreetMap tile layer to map element
-        // Also change the basemap
-        L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Physical_Map/MapServer/tile/{z}/{y}/{x}', {
-	attribution: 'Tiles &copy; Esri &mdash; Source: US National Park Service',
-	maxZoom: 8 }).addTo(map);
+      
+    // Add OpenStreetMap tile layer to map element
+    // Task 3: Change the basemap
+        L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
+	maxZoom: 19,
+	attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Tiles style by <a href="https://www.hotosm.org/" target="_blank">Humanitarian OpenStreetMap Team</a> hosted by <a href="https://openstreetmap.fr/" target="_blank">OpenStreetMap France</a>'
+        }).addTo(map);
          
- // Create point feature for Kendall Square T Station
-    var myDataPoint = L.marker([42.362432, -71.086086]).addTo(map);
+    // Create point feature for Aerial Lift bridge
+    var myDataPoint = L.marker([46.7790, -92.0929]).addTo(map);
         
-    // Create line feature for Mass Ave Bridge, style and add to map
-    var myDataLine = L.polyline([[42.357227, -71.092631], [42.351411, -71.089723]],
-    {color: 'red', weight: 10}).addTo(map);
+    // Create line feature for Aerial Bridge, style and add to map
+    var myDataLine = L.polyline([[46.779339, -92.093153], [46.778560, -92.092609]],
+    {color: 'red', weight: 8}).addTo(map);
         
     // Create area feature for MIT, style and add to map
     var myArea = L.polygon([[42.353770, -71.103606], [42.355447, -71.104475],
@@ -61,13 +67,13 @@
     {color: 'blue', weight: 4}).addTo(map);
         
     // Bind popup to data point object
-    myDataPoint.bindPopup("<h3>Kendall Square</h3><p>Cambridge, MA<br>Information about Kendall Square.</p>");
+    myDataPoint.bindPopup("<h3>Aerial Lift Bridge</h3><p>Duluth, MN<br>Information about Aerial Lift Bridge.</p>");
         
     // Bind popup to line object
-    myDataLine.bindPopup("Mass Ave Bridge");
+    myDataLine.bindPopup("Aerial Lift Bridge");
 
     // Bind popup to area object
-    myArea.bindPopup("MIT Campus");
+    myArea.bindPopup("Aerial Lift Bridge");
         
     // Create an Empty Popup
     var popup = L.popup();
@@ -82,6 +88,17 @@
 
     // Listen for a click event on the Map element
     map.on('click', onMapClick);
+    
+    // Task 5: add mouse move for container for Map coord
+    // map.on('mousemove', function (e) {
+       // console.log('mousemove, e);
+        // update HTML for info element
+        //document.getElementById('containerForMyCoord').innerHTML = 
+        //    "Map Coordinates: " + JSON.stringify(e.latlng);
+        
+    //});
+
+    
         
     </script>
 </body>
