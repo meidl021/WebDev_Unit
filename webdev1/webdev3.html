@@ -61,9 +61,9 @@
     var myDataLine = L.polyline([[46.779339, -92.093153], [46.778560, -92.092609]],
     {color: 'red', weight: 8}).addTo(map);
         
-    // Create area feature for MIT, style and add to map
-    var myArea = L.polygon([[42.353770, -71.103606], [42.355447, -71.104475],
-    [42.362681, -71.089830], [42.361829, -71.079230]],
+    // Create area feature for Bagley Nature Center and add to map
+    var myArea = L.polygon([[46.820490, -92.090489], [46.822951, -92.091184],
+    [46.823648, -92.092619], [46.825333, -92.083463], [46.824789, -92.082996], [46.824774, -92.081638], [46.824341, -92.080941], [46.823680, -92.080866], [46.823665, -92.083516], [46.824039, -92.084278], [46.822740, -92.087411], [46.822013, -92.087422] [46.820490, -92.090489]],
     {color: 'blue', weight: 4}).addTo(map);
         
     // Bind popup to data point object
@@ -73,7 +73,7 @@
     myDataLine.bindPopup("Aerial Lift Bridge");
 
     // Bind popup to area object
-    myArea.bindPopup("Aerial Lift Bridge");
+    myArea.bindPopup("WR Bagley Nature Area");
         
     // Create an Empty Popup
     var popup = L.popup();
