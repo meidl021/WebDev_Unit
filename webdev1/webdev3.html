@@ -7,6 +7,7 @@
 <!--   Add course name, your name, etc -->
     <h1>GIS 4533, WebDev Maps
     <br>Brandy Meidl</br>Due 10/30/19</br>
+=======
     </h1>
     <!-- External Stylesheets -->
 <!--Updated Leaflet version here-->
@@ -22,7 +23,11 @@
         html, body, #map {
             height: 100%;
             width: 100%;
+
         }
+=======
+                }
+
     </style>
        </head>
 <body>
@@ -34,12 +39,13 @@
 <!--    Updated/removed pixel specs for the map so it will show full screen dynamically-->
     <div id="map"></div>
     
+=======
+
 <!--    Updated 2nd place of code for Leaflet version-->
    <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"
   integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og=="
   crossorigin=""></script>
-    
-    
+
     // Task 5: Container for displaying map coordinates
     <pre id="displayMapCoord">Map coordinates: {"lat": 46.786380, "lng": -92.094997}</pre>
     
@@ -99,6 +105,13 @@
         //"Map coordinates: " + JSON.stringify(e.latlng);
         //});
             
+=======
+    <script>
+    // Create variable to hold map element, give initial settings to map
+    var map = L.map('map',{ center: [42.362432, -71.086086], zoom: 14});
+
+      // Add OpenStreetMap tile layer to map element
+      L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', { attribution: '© OpenStreetMap' }).addTo(map);
     </script>
 </body>
 </html>
