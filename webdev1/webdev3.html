@@ -3,11 +3,11 @@
 <head>
 	<meta charset="utf-8">
 <!--    Update Map Title-->
-	<title>Leaflet Web Dev 1 Map</title>
+	<title>Leaflet Web Dev Maps</title>
 <!--   Add course name, your name, etc -->
-    <h1>GIS 4533, WebDev Map 1
-    <br>Brandy Meidl</br>
-    <br>Due 10/21/19</br>
+    <h1>GIS 4533, WebDev Maps
+    <br>Brandy Meidl</br>Due 10/30/19</br>
+=======
     </h1>
     <!-- External Stylesheets -->
 <!--Updated Leaflet version here-->
@@ -23,20 +23,89 @@
         html, body, #map {
             height: 100%;
             width: 100%;
+
+        }
+=======
                 }
+
     </style>
        </head>
 <body>
     
     <!-- Our web map and content will go here -->
-       <!-- Add the Leaflet JavaScript library -->
+    <!-- Add the Leaflet JavaScript library -->
     <a href="https://leafletjs.com">I built this with Leaflet</a>
+    
 <!--    Updated/removed pixel specs for the map so it will show full screen dynamically-->
     <div id="map"></div>
+    
+=======
+
 <!--    Updated 2nd place of code for Leaflet version-->
    <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"
   integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og=="
   crossorigin=""></script>
+
+    // Task 5: Container for displaying map coordinates
+    <pre id="displayMapCoord">Map coordinates: {"lat": 46.786380, "lng": -92.094997}</pre>
+    
+    <script>
+    // Create variable to hold map element, give initial settings to map
+    // Task 2: Change the X,Y coordinates to Duluth, MN
+    var map = L.map('map',{ center: [46.786380, -92.094997], zoom: 13});
+      
+    // Add OpenStreetMap tile layer to map element
+    // Task 3: Change the basemap
+        L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
+	maxZoom: 19,
+	attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Tiles style by <a href="https://www.hotosm.org/" target="_blank">Humanitarian OpenStreetMap Team</a> hosted by <a href="https://openstreetmap.fr/" target="_blank">OpenStreetMap France</a>'
+        }).addTo(map);
+    
+    // Task 4: Add 3 points/objects of interest to map
+    // Create point feature for Aerial Lift bridge
+    var myDataPoint = L.marker([46.7790, -92.0929]).addTo(map);
+        
+    // Create line feature for Aerial Bridge, style and add to map
+    var myDataLine = L.polyline([[46.779339, -92.093153], [46.778560, -92.092609]],
+    {color: 'red', weight: 4}).addTo(map);
+        
+    // Create area feature for Bagley Nature Center and add to map
+    var myArea = L.polygon([[46.820490, -92.090489], [46.822951, -92.091184],
+    [46.823648, -92.092619], [46.825333, -92.083463], [46.824789, -92.082996], [46.824774, -92.081638], [46.824341, -92.080941], [46.823680, -92.080866], [46.823665, -92.083516], [46.824039, -92.084278], [46.822740, -92.087411], [46.822013, -92.087422]],
+    {color: 'blue', weight: 4}).addTo(map);
+        
+    // Bind popup to data point object
+    myDataPoint.bindPopup("<h3>Aerial Lift Bridge</h3><p>Duluth, MN<br>Information about Aerial Lift Bridge.</p>");
+        
+    // Bind popup to line object
+    myDataLine.bindPopup("Aerial Lift Bridge");
+
+    // Bind popup to area object
+    myArea.bindPopup("WR Bagley Nature Area");
+        
+    // Create an Empty Popup
+    var popup = L.popup();
+
+    // Write function to set Properties of the Popup
+    function onMapClick(e) {
+    popup
+        .setLatLng(e.latlng)
+        .setContent("You clicked the map at " + e.latlng.toString())
+        .openOn(map);
+    }
+
+    // Listen for a click event on the Map element
+    map.on('click', onMapClick);
+    
+    // Task 5: Add mouse move for container for Map coord. Based on GIS 4533 class instructor code. Note: commented out code since lines caused map not to show.
+    //map.on('mousemove', function (e) {
+        //console.log('mousemove, e);
+        // update HTML for info element
+        //document.getElementById("displayMapCoord").innerHTML = 
+        //"Map coordinates: " + JSON.stringify(e.latlng);
+        //});
+            
+=======
     <script>
     // Create variable to hold map element, give initial settings to map
     var map = L.map('map',{ center: [42.362432, -71.086086], zoom: 14});
