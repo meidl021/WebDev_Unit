@@ -39,8 +39,9 @@
   integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og=="
   crossorigin=""></script>
     
+    
     // Task 5: Container for displaying map coordinates
-    <pre id='containerForDisplayingMapCoord'></pre>
+    <pre id="displayMapCoord">Map coordinates: {"lat": 46.786380, "lng": -92.094997}</pre>
     
     <script>
     // Create variable to hold map element, give initial settings to map
@@ -53,7 +54,8 @@
 	maxZoom: 19,
 	attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Tiles style by <a href="https://www.hotosm.org/" target="_blank">Humanitarian OpenStreetMap Team</a> hosted by <a href="https://openstreetmap.fr/" target="_blank">OpenStreetMap France</a>'
         }).addTo(map);
-         
+    
+    // Task 4: Add 3 points/objects of interest to map
     // Create point feature for Aerial Lift bridge
     var myDataPoint = L.marker([46.7790, -92.0929]).addTo(map);
         
@@ -89,17 +91,14 @@
     // Listen for a click event on the Map element
     map.on('click', onMapClick);
     
-    // Task 5: add mouse move for container for Map coord
-    // map.on('mousemove', function (e) {
-       // console.log('mousemove, e);
+    // Task 5: Add mouse move for container for Map coord. Based on GIS 4533 class instructor code.
+    //map.on('mousemove', function (e) {
+        //console.log('mousemove, e);
         // update HTML for info element
-        //document.getElementById('containerForMyCoord').innerHTML = 
-        //    "Map Coordinates: " + JSON.stringify(e.latlng);
-        
-    //});
-
-    
-        
+        //document.getElementById("displayMapCoord").innerHTML = 
+        //"Map coordinates: " + JSON.stringify(e.latlng);
+        //});
+            
     </script>
 </body>
 </html>
