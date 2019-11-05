@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+<!--    Update Map Title-->
+	<title>Leaflet Web Dev 1 Map</title>
+<!--   Add course name, your name, etc -->
+    <h1>GIS 4533, WebDev Maps
+    <br>Brandy Meidl</br>
+    <br>Due 11/04/19</br>
+    </h1>
+    <!-- External Stylesheets -->
+<!--Updated Leaflet version here-->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"
+  integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+  crossorigin=""/>
+<!--Updated map sizing style here. Additional code commands noted below-->
+    <style>
+        body {
+            padding: 0;
+            margin: 0;
+        }
+        html, body, #map {
+            height: 100%;
+            width: 100%;
+        }
+    </style>
+       </head>
+<body>
+    
+    <!-- Our web map and content will go here -->
+    <!-- Add the Leaflet JavaScript library -->
+    <a href="https://leafletjs.com">I built this with Leaflet</a>
+    
+<!--    Updated/removed pixel specs for the map so it will show full screen dynamically-->
+    <div id="map"></div>
+    
+    <!--Task 3: Add jQuery code-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+    
+<!--    Updated 2nd place of code for Leaflet version-->
+   <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"
+  integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og=="
+  crossorigin=""></script>
+    
+
+    
+   
+    
+    <script>
+    // Create variable to hold map element, give initial settings to map
+    // Task 2: Update map coordinates to Duluth and zoom
+        
+    var map = L.map('map',{ center: [46.782001, -92.094711], zoom: 11});
+      // Add OpenStreetMap tile layer to map element
+      L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', { attribution: '© OpenStreetMap' }).addTo(map);
+        
+    // Task 4: Add Duluth precinct data. Source: Guidance from Jesse Adams at North Point GIS.    
+    // load GeoJSON from an external file        
+    $.getJSON("./data/duluth_precincts_WGS84.geojson",function(data){
+
+    // add GeoJSON layer to the map once the file is loaded
+    L.geoJson(data,{
+        style: function (feature) {
+
+            // calculate third party percent of vote using function
+//            var thirdPartyPct = calculateThirdPartyPct(feature);
+            var demPct;
+            var repPct;
+            var fill;
+            var demOrRep = calculateDemPct(feature);
+            if (demOrRep === 'dem') {
+                demPct = calculatePercent(feature, demOrRep);
+                if (demPct > 60) {
+                    fill = '#0571b0';
+                }
+            }
+            else (demOrRep === 'rep') 
+                repPct = calculatePercent(feature, demOrRep);
+                if (repPct >50) {
+                     fill = '#ca0020';
+                }
+            }
+
+            // assign colors from the ColorBrewer yellow-green scale
+            
+            // equal interval classification
+            // 7% or less
+//            if (thirdPartyPct <= 7) {
+//                fill = '#f7fcb9';
+//        
+//            }
+//            // 11% or less
+//            else if ((thirdPartyPct <= 11) && (repPct > 20) ) {
+//                fill = '#ca0020';
+//            }
+//            
+//            else if ((thirdPartyPct <= 11) && (repPct > 20) ){
+//                fill = '#ca0020';
+//            }
+//            // 12% or more
+//            else {
+//                fill = '#31a354';
+//            }
+
+            // FIXME: remove existing symbolization and create a diverging
+            // symbology based the democrat or republic vote as a percent
+            // of the total vote.
+            // Use Colorbrewer's 5-class Red-Blue colors for this
+            // http://colorbrewer2.org/#type=diverging&scheme=RdBu&n=5
+
+            // return style specification
+//            return {
+//                color: '#636363',
+//                weight: 2,
+//                fillColor: fill,
+//                fillOpacity: 0.7
+//            }
+ //       },
+
+        // do something to each feature
+        // in this case create a popup
+//        onEachFeature: function (feature, layer) {
+//           var thirdPartyPct = calculateDemPct(feature);
+//            // show name of precinct and third party percent in popup
+//            layer.bindPopup(
+//                "<h3>" + feature.properties.PCTNAME + "</h3>" +
+//                "<p>Third Party Vote: " + thirdPartyPct + "%</p>"
+//           );
+//        }
+    }).addTo(map);
+});	
+
+// a function that takes a feature and returns the percent of the vote
+// that doesn't belong to Republican or Democrat (ie. Third Party)
+function calculatePercent(feature, party) {
+//    console.log(feature);
+    var demVote = feature.properties.USPRSDFL;
+    var repVote = feature.properties.USPRSR;
+    var totalVote = feature.properties.USPRSTOTAL;
+    if (party === 'dem') {
+        var demPct = Math.round(demVote/totalVote*100);
+        return demPct;
+    }
+    // third party vote is whatever is left over from dem and rep vote
+//    var thirdPartyVote = (totalVote - demVote - repVote);
+    // var thirdPartyVote = (totalVote - demVote - repVote);
+    // calculate as a percent of the total vote
+//    var thirdPartyPct = Math.round(thirdPartyVote/totalVote*100);
+//    var demPct = Math.round(demVote/totalVote*100);
+//    var repPct = Math.round(repVote/totalVote*100);
+    
+    // return the third party percent for this feature
+//    return thirdPartyPct;
+}
+    
+function calculateDemPct(feature) {
+    
+//    console.log(feature);
+    var demVote = feature.properties.USPRSDFL;
+    var repVote = feature.properties.USPRSR;
+    var totalVote = feature.properties.USPRSTOTAL;
+    // third party vote is whatever is left over from dem and rep vote
+    var thirdPartyVote = (totalVote - demVote - repVote);
+    
+    // calculate as a percent of the total vote
+    var demPct = Math.round(demVote/totalVote*100);
+    var repPct = Math.round(repVote/totalVote*100);
+    if (demPct > repPct) {
+        return 'dem';
+        }
+    
+    else return 'rep';    
+    
+}
+        
+    </script>
+</body>
+</html>

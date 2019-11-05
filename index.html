@@ -41,6 +41,11 @@
   integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og=="
   crossorigin=""></script>
     
+    
+    <!-- HTML Page Elements are here -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- Web Map Scripts are here -->
+    
     <script>
     // Create variable to hold map element, give initial settings to map
     var map = L.map('map',{ center: [42.362432, -71.086086], zoom: 14});
@@ -83,13 +88,13 @@
     // Listen for a click event on the Map element
     map.on('click', onMapClick);
     
-    
+    // load GeoJSON from an external file
+    $.getJSON("../data/coffee_cafes.geojson",function(data){
+    // add GeoJSON layer to the map once the file is loaded
+    L.geoJson(data).addTo(map);
+    });
         
     </script>
-    
-    <!-- HTML Page Elements are here -->
-<!--    Step 5: (undelete for WebDev4) <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>-->
-        <!-- Web Map Scripts are here -->
     
 </body>
 </html>
