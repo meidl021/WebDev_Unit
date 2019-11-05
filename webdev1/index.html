@@ -8,7 +8,7 @@
 <!--   Add course name, your name, etc -->
     <h1>GIS 4533, WebDev Maps
     <br>Brandy Meidl</br>
-    <br>Due 10/30/19</br>
+    <br>Due 11/04/19</br>
     </h1>
     <!-- External Stylesheets -->
     <!--Updated Leaflet version here-->
@@ -40,6 +40,11 @@
     <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"
   integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og=="
   crossorigin=""></script>
+    
+     <!-- HTML Page Elements are here -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- Web Map Scripts are here -->
+    
     
     <script>
     // Create variable to hold map element, give initial settings to map
@@ -83,6 +88,15 @@
     // Listen for a click event on the Map element
     map.on('click', onMapClick);
     
+    // load GeoJSON from an external file
+    $.getJSON("./data/coffee_cafes.geojson",function(data){
+    // add GeoJSON layer to the map once the file is loaded
+    L.geoJson(data,{
+        onEachFeature: function (feature, layer) {
+            layer.bindPopup(feature.properties.name);
+        }
+    }).addTo(map);
+    });
     
         
     </script>
